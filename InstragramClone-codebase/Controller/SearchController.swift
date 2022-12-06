@@ -16,10 +16,9 @@ class SearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemMint
     }
     
     // MARK: - Helpers
-    
-    // MARK: - Actions
+
 }
