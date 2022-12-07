@@ -49,6 +49,7 @@
 		DA48EC81291EA264003CEE7E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA48EC80291EA264003CEE7E /* Extensions.swift */; };
 		DA48EC84291EA35A003CEE7E /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DA48EC83291EA35A003CEE7E /* JGProgressHUD */; };
 		DA80707F2929248D00AC521D /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA80707E2929248D00AC521D /* LoadingIndicator.swift */; };
+		DA8733EC293FFE2000E905FC /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8733EB293FFE2000E905FC /* UserCell.swift */; };
 		DAE77BDE2921085E003880BE /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE77BDD2921085E003880BE /* LoginController.swift */; };
 		DAE77BE02921086E003880BE /* RegistraionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE77BDF2921086E003880BE /* RegistraionController.swift */; };
 		DAE77BE329211395003880BE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DAE77BE229211395003880BE /* SnapKit */; };
@@ -85,6 +86,7 @@
 		DA48EC7E291E9FDB003CEE7E /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		DA48EC80291EA264003CEE7E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DA80707E2929248D00AC521D /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		DA8733EB293FFE2000E905FC /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		DAE77BDD2921085E003880BE /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		DAE77BDF2921086E003880BE /* RegistraionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistraionController.swift; sourceTree = "<group>"; };
 		DAE77BE729218C0F003880BE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				DA477F68292A02C300245F6A /* Profile */,
 				DAE77BE729218C0F003880BE /* CustomTextField.swift */,
 				DA80707E2929248D00AC521D /* LoadingIndicator.swift */,
+				DA8733EB293FFE2000E905FC /* UserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				DA477F67292A02BE00245F6A /* ProfileHeader.swift in Sources */,
 				DA48EC77291E8B74003CEE7E /* SearchController.swift in Sources */,
 				DAE77BE02921086E003880BE /* RegistraionController.swift in Sources */,
+				DA8733EC293FFE2000E905FC /* UserCell.swift in Sources */,
 				DA48EC58291E88CE003CEE7E /* AppDelegate.swift in Sources */,
 				DA48EC7D291E8B99003CEE7E /* ProfileController.swift in Sources */,
 				DA48EC75291E8B68003CEE7E /* FeedController.swift in Sources */,

@@ -16,11 +16,19 @@ struct UserService {
             if let error = error {
                 print(#fileID, #function, #line, "-Firebase Get User Error \(error)")
             }
-//            print(#fileID, #function, #line, "-Firebase Get Data : \(snapShot?.data())")
             
             let user = User(dictionary: dictionary)
             completion(user)
             
+        }
+    }
+    
+    static func fetchUsers(completion: @escaping([User]) -> Void) {
+        COLLECTION_USERS.getDocuments { (snapshot, error) in
+            guard let snapshot = snapshot else { return }
+            
+            let users = snapshot.documents.map({User(dictionary: $0.data())})
+            completion(users)
         }
     }
 }
