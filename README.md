@@ -1,6 +1,6 @@
 # Instragram-codebase-uikit
 
-# 인스타 그램 클론 코딩을 Codebase(programmatically) 로 작성하였습니다.
+# 인스타 그램 클론 코딩을 Codebase(programmatically) MVVM 로 작성하였습니다.
 
 상태는 Combine
 
