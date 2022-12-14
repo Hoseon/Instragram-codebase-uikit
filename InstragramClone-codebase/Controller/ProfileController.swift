@@ -28,7 +28,7 @@ class ProfileController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-//        fetchUser()
+        //        fetchUser()
     }
     
     // MARK: - API
@@ -36,7 +36,7 @@ class ProfileController: UICollectionViewController {
         UserService.fetchUser { user in
             self.user = user
             self.navigationItem.title = user.username
-
+            
         }
     }
     
@@ -67,10 +67,9 @@ extension ProfileController {
         
         print(#fileID, #function, #line, "-Did cell header function...")
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
-        
+        header.delegate = self
         
         header.viewModel = ProfileHeaderViewModel(user: user)
-        
         
         return header
     }
@@ -101,4 +100,26 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 240)
     }
+}
+
+// MARK: - ProfileHeaderDelegate
+
+extension ProfileController: ProfileHeaderDelegate {
+    func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
+        if user.isCurrentUser {
+            print(print(#fileID, #function, #line, "-Show edit profile Header"))
+        }
+        
+        if user.isFollowed {
+            print(#fileID, #function, #line, "-Handle follow user here...")
+        } else {
+            print(#fileID, #function, #line, "- Follow user here")
+            UserService.follow(uid: user.uid) { error in
+                print(#fileID, #function, #line, "-Did follow user, update UI Now...")
+            }
+        }
+        
+    }
+    
+    
 }
