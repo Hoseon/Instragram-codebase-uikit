@@ -44,19 +44,16 @@ class ProfileHeader: UICollectionReusableView {
     }
     
     private lazy var postLabel = UILabel().then {
-        $0.attributedText = attributedStateText(value: 1, label: "posts")
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }
     
     private lazy var followresLabel = UILabel().then {
-        $0.attributedText = attributedStateText(value: 1, label: "followers")
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }
     
     private lazy var followingLabel = UILabel().then {
-        $0.attributedText = attributedStateText(value: 1, label: "following")
         $0.numberOfLines = 0
         $0.textAlignment = .center
     }
@@ -166,6 +163,7 @@ class ProfileHeader: UICollectionReusableView {
     func configure() {
         guard let viewModel = viewModel else { return }
         guard let imageUrl = viewModel.profileImageUrl else {return}
+
         nameLabel.text = viewModel.fullname
         profileImageView.sd_setImage(with: imageUrl)
         
@@ -173,8 +171,9 @@ class ProfileHeader: UICollectionReusableView {
         editProfileFollowButton.setTitleColor(viewModel.followButtonTextColor, for: .normal)
         editProfileFollowButton.backgroundColor = viewModel.followButtonBackgroundColor
         
-        
-        
+        postLabel.attributedText = viewModel.numberOfPosts
+        followresLabel.attributedText = viewModel.numberOfFollowers
+        followingLabel.attributedText = viewModel.numberOfFollowing
     }
     
     func attributedStateText(value: Int, label: String) -> NSAttributedString {

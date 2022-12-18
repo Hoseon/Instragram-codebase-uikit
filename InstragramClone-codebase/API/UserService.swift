@@ -42,6 +42,34 @@ struct UserService {
     }
     
     static func unfollow(uid: String, completion: @escaping(FireStoreCompletion)) {
+        guard let currentId = Auth.auth().currentUser?.uid else { return }
         
+        COLLECTION_FOLLOWING.document(currentId).collection("user-following")
+            .document(uid).delete { error in
+                COLLECTION_FOLLOWERS.document(uid).collection("user-followers").document(currentId).delete(completion: completion)
+                
+            }
+    }
+    
+    static func checkIfUserIsFollowed(uid: String, completion: @escaping(Bool) -> Void) {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        let ref = COLLECTION_FOLLOWING.document(currentUid).collection("user-following").document(uid).getDocument { (snapshot, error) in
+            guard let isFollowed = snapshot?.exists else { return }
+            completion(isFollowed)
+        }
+    }
+    
+    static func fetchUserStats(uid: String, completion: @escaping(UserStats)-> Void) {
+        COLLECTION_FOLLOWERS.document(uid).collection("user-followers").getDocuments { (snapshot, _) in
+            let followers = snapshot?.documents.count ?? 0
+            
+            COLLECTION_FOLLOWING.document(uid).collection("user-following").getDocuments { (snapshot, _) in
+                let following = snapshot?.documents.count ?? 0
+                
+                completion(UserStats(followers: followers, following: following))
+            }
+            
+        }
     }
 }

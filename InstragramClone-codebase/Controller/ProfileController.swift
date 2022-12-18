@@ -29,9 +29,25 @@ class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         configureCollectionView()
         //        fetchUser()
+        checkIfUserIsFollowed()
+        fetchUserStats()
     }
     
     // MARK: - API
+    func checkIfUserIsFollowed() {
+        UserService.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
+            self.user.isFollowed = isFollowed
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func fetchUserStats() {
+        UserService.fetchUserStats(uid: user.uid) { stats in
+            self.user.stats = stats
+            self.collectionView.reloadData()
+        }
+    }
+    
     func fetchUser() {
         UserService.fetchUser { user in
             self.user = user
@@ -108,14 +124,16 @@ extension ProfileController: ProfileHeaderDelegate {
     func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
         if user.isCurrentUser {
             print(print(#fileID, #function, #line, "-Show edit profile Header"))
-        }
-        
-        if user.isFollowed {
-            print(#fileID, #function, #line, "-Handle follow user here...")
+        } else if user.isFollowed {
+            print(#fileID, #function, #line, "-")
+            UserService.unfollow(uid: user.uid) { error in
+                self.user.isFollowed = false
+                self.collectionView.reloadData()
+            }
         } else {
-            print(#fileID, #function, #line, "- Follow user here")
             UserService.follow(uid: user.uid) { error in
-                print(#fileID, #function, #line, "-Did follow user, update UI Now...")
+                self.user.isFollowed = true
+                self.collectionView.reloadData()
             }
         }
         
