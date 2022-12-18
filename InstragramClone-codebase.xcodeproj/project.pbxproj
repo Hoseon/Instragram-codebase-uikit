@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA1AB5B9294FCC3D00EAC6A8 /* YPImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = DA1AB5B8294FCC3D00EAC6A8 /* YPImagePicker */; };
 		DA1B6D672922FE5600D21930 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA1B6D662922FE5600D21930 /* GoogleService-Info.plist */; };
 		DA1B6D6A2922FF2E00D21930 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DA1B6D692922FF2E00D21930 /* FirebaseAnalytics */; };
 		DA1B6D6C2922FF2E00D21930 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = DA1B6D6B2922FF2E00D21930 /* FirebaseAppCheck */; };
@@ -90,7 +89,6 @@
 		DA80707E2929248D00AC521D /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		DA8733EB293FFE2000E905FC /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		DAB00B0A29407E0A000E9D2B /* UserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellViewModel.swift; sourceTree = "<group>"; };
-		DAC939BA294AD04A0029769D /* InstragramClone-codebase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "InstragramClone-codebase.entitlements"; sourceTree = "<group>"; };
 		DAE77BDD2921085E003880BE /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		DAE77BDF2921086E003880BE /* RegistraionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistraionController.swift; sourceTree = "<group>"; };
 		DAE77BE729218C0F003880BE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 				DA48EC84291EA35A003CEE7E /* JGProgressHUD in Frameworks */,
 				DA1B6D7E2922FF2E00D21930 /* FirebaseFirestoreSwift in Frameworks */,
 				DAE77BE6292113D3003880BE /* Then in Frameworks */,
-				DA1AB5B9294FCC3D00EAC6A8 /* YPImagePicker in Frameworks */,
 				DA1B6D862922FF2E00D21930 /* FirebaseStorage in Frameworks */,
 				DAE77BED2922795E003880BE /* CombineCocoa in Frameworks */,
 				DA1B6D6A2922FF2E00D21930 /* FirebaseAnalytics in Frameworks */,
@@ -158,7 +155,6 @@
 		DA48EC56291E88CE003CEE7E /* InstragramClone-codebase */ = {
 			isa = PBXGroup;
 			children = (
-				DAC939BA294AD04A0029769D /* InstragramClone-codebase.entitlements */,
 				DA48EC6D291E8A57003CEE7E /* Controller */,
 				DA48EC70291E8A5D003CEE7E /* Model */,
 				DA48EC6F291E8A5B003CEE7E /* View */,
@@ -287,7 +283,6 @@
 				DA1B6D852922FF2E00D21930 /* FirebaseStorage */,
 				DA1B6D872922FF2E00D21930 /* FirebaseStorageCombine-Community */,
 				DA477F72292A349B00245F6A /* SDWebImage */,
-				DA1AB5B8294FCC3D00EAC6A8 /* YPImagePicker */,
 			);
 			productName = "InstragramClone-codebase";
 			productReference = DA48EC54291E88CE003CEE7E /* InstragramClone-codebase.app */;
@@ -324,7 +319,6 @@
 				DAE77BEB2922795E003880BE /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 				DA1B6D682922FF2E00D21930 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DA477F71292A349B00245F6A /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				DA1AB5B7294FCC3D00EAC6A8 /* XCRemoteSwiftPackageReference "YPImagePicker" */,
 			);
 			productRefGroup = DA48EC55291E88CE003CEE7E /* Products */;
 			projectDirPath = "";
@@ -524,7 +518,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "InstragramClone-codebase/InstragramClone-codebase.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FVWPNKUT4H;
@@ -553,7 +546,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "InstragramClone-codebase/InstragramClone-codebase.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FVWPNKUT4H;
@@ -601,14 +593,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DA1AB5B7294FCC3D00EAC6A8 /* XCRemoteSwiftPackageReference "YPImagePicker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Yummypets/YPImagePicker.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		DA1B6D682922FF2E00D21930 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -660,11 +644,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DA1AB5B8294FCC3D00EAC6A8 /* YPImagePicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DA1AB5B7294FCC3D00EAC6A8 /* XCRemoteSwiftPackageReference "YPImagePicker" */;
-			productName = YPImagePicker;
-		};
 		DA1B6D692922FF2E00D21930 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DA1B6D682922FF2E00D21930 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
