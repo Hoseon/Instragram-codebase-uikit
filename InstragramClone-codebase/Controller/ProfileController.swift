@@ -14,6 +14,9 @@ private let headerIdentifier = "ProfileHeader"
 class ProfileController: UICollectionViewController {
     // MARK: - Properties
     private var user: User
+    private var posts = [Post]()
+    
+    var post: Post?
     
     init(user: User) {
         self.user = user
@@ -28,9 +31,11 @@ class ProfileController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        //        fetchUser()
         checkIfUserIsFollowed()
         fetchUserStats()
+        fetchPosts()
+        
+        PostService.updateUserFeedAfterFollowing(user: user, didFollow: true)
     }
     
     // MARK: - API
@@ -48,11 +53,10 @@ class ProfileController: UICollectionViewController {
         }
     }
     
-    func fetchUser() {
-        UserService.fetchUser { user in
-            self.user = user
-            self.navigationItem.title = user.username
-            
+    func fetchPosts() {
+        PostService.fetchPosts(forUser: user.uid) { posts in
+            self.posts = posts
+            self.collectionView.reloadData()
         }
     }
     
@@ -68,12 +72,13 @@ class ProfileController: UICollectionViewController {
 
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return post == nil ? posts.count : 1
     }
     
     //컬렉션 뷰의 본체 내용물
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ProfileCell
+        cell.viewModel = PostViewModel(post: posts[indexPath.row])
         
         return cell
     }
@@ -91,8 +96,14 @@ extension ProfileController {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 
 extension ProfileController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = FeedController(collectionViewLayout: UICollectionViewFlowLayout())
+        controller.post = posts[indexPath.row]
+        navigationController?.pushViewController(controller, animated: true)
+    }
     
 }
 
@@ -110,7 +121,6 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
         let width = (view.frame.width - 2) / 3
         
         return CGSize(width: width, height: width)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -122,6 +132,8 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
 
 extension ProfileController: ProfileHeaderDelegate {
     func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
+        guard let tab = tabBarController as? MainTabController else { return }
+        guard let currentUser = tab.user else { return }
         if user.isCurrentUser {
             print(print(#fileID, #function, #line, "-Show edit profile Header"))
         } else if user.isFollowed {
@@ -129,11 +141,19 @@ extension ProfileController: ProfileHeaderDelegate {
             UserService.unfollow(uid: user.uid) { error in
                 self.user.isFollowed = false
                 self.collectionView.reloadData()
+                
+                PostService.updateUserFeedAfterFollowing(user: user, didFollow: false)
             }
         } else {
             UserService.follow(uid: user.uid) { error in
                 self.user.isFollowed = true
                 self.collectionView.reloadData()
+                
+                NotificationService.uploadNotification(toUid: user.uid, fromUser: currentUser, type: .follow)
+                
+                PostService.updateUserFeedAfterFollowing(user: user, didFollow: true)
+                
+                
             }
         }
         

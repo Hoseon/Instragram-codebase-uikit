@@ -12,7 +12,7 @@ import YPImagePicker
 class MainTabController: UITabBarController {
     
     // MARK: - LifeCycle
-    private var user: User? {
+    var user: User? {
         didSet {
             guard let user = user else { return }
             configureViewControllers(withUser: user)
@@ -27,7 +27,8 @@ class MainTabController: UITabBarController {
     
     // MARK: - API
     func fetchUser() {
-        UserService.fetchUser { user in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        UserService.fetchUser(withUid: uid) { user in
             self.user = user
         }
     }
@@ -75,9 +76,16 @@ class MainTabController: UITabBarController {
     
     func didFinishPickingMedia(_ picker: YPImagePicker) {
         picker.didFinishPicking { items, _ in
-            picker.dismiss(animated: true) {
+            picker.dismiss(animated: false) {
                 guard let selectedImage = items.singlePhoto?.image else { return }
-                print(#fileID, #function, #line, "-DEBUG: Selected image is \(selectedImage)")
+                
+                let controller = UploadPostController()
+                controller.selectedImage = selectedImage
+                controller.delegate = self
+                controller.currentUser = self.user
+                let nav = UINavigationController(rootViewController: controller)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: false, completion: nil)
             }
         }
     }
@@ -111,8 +119,20 @@ extension MainTabController: UITabBarControllerDelegate {
             
             didFinishPickingMedia(picker)
         }
-        print("DEBUG: Index of view controller is \(index)")
         
         return true
+    }
+}
+
+// MARK: - UploadPostControllerDelegate
+extension MainTabController: UploadPostControllerDelegate {
+    func controllerDidFinishUploadingPost(_ controller: UploadPostController) {
+        selectedIndex = 0
+        controller.dismiss(animated: true, completion: nil)
+        //Feed를 등록하면 그 화면이 닫히고 닫히면
+        guard let feedNav = viewControllers?.first as? UINavigationController else { return }
+        //FeedController를 가져와 리프레시를 해준다
+        guard let feed = feedNav.viewControllers.first as? FeedController else { return }
+        feed.handRefresh()
     }
 }

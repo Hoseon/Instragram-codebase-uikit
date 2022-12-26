@@ -46,7 +46,6 @@ class LoginController: UIViewController {
     private lazy var loginButton = UIButton(type: .system).then {
         $0.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         $0.isEnabled = false
-        //        $0.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         $0.layer.cornerRadius = 5
         $0.backgroundColor = .systemPurple.withAlphaComponent(0.5)
@@ -59,12 +58,14 @@ class LoginController: UIViewController {
     private let donthabeAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.attributedTitle(firstPart: "Forgot your password", secondPart: "Get help signing in.")
+        button.addTarget(self, action: #selector(handleShowResetPassword), for: .touchUpInside)
         return button
     }()
     
     private let forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.attributedTitle(firstPart: "Don't have an account", secondPart: "Sign Up")
+        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -103,7 +104,6 @@ class LoginController: UIViewController {
     }
     
     @objc func handleShowSignUp() {
-        print("DEBUD: Show sign up here...")
         let controller = RegistraionController()
         controller.delegate = delegate
         navigationController?.pushViewController(controller, animated: true)
@@ -117,6 +117,11 @@ class LoginController: UIViewController {
         }
         
         updateForm()
+    }
+    
+    @objc func handleShowResetPassword() {
+        let controller = ResetPasswordController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - Helpers

@@ -12,6 +12,10 @@ import Then
 class ProfileCell: UICollectionViewCell {
     // MARK: - ProPerties
     
+    var viewModel: PostViewModel? {
+        didSet { configure() }
+    }
+    
     private let postImageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
@@ -31,6 +35,13 @@ class ProfileCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Helpers
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        
+        postImageView.sd_setImage(with: viewModel.imageUrl)
     }
     
     
